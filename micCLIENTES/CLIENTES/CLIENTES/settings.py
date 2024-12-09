@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9ead+z9#y)(u(trsizlpmyh5-#k(=a0q!rrwu%291d%07tgi&(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'clientesAPP',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'CLIENTES.urls'
@@ -76,7 +79,7 @@ WSGI_APPLICATION = 'CLIENTES.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME':'miclientes',
+        'NAME':'micclientes',
         'USER':'root',
         'PASSWORD':'',
         'PORT':'3310',
@@ -125,3 +128,14 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://192.168.0.15:9000",
+    "http://192.168.0.15:8000",
+]
+
+# settings.py
+CSRF_COOKIE_DOMAIN = '.localhost'  # Permitir cookies entre subdominios si es necesario
+CSRF_COOKIE_SAMESITE = 'None'  # Permitir cookies de terceros si es necesario
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://localhost:9000']  # Agregar las URLs de tus microservicios
+
